@@ -20,6 +20,15 @@ app.post("/news/:n", async (req, res) => {
     });
 });
 
+app.get("/topheadlines/:n", async (req, res) => {
+  const n = req.params.n;
+  axios
+    .get(`https://gnews.io/api/v4/top-headlines?token=${apiToken}&max=${n}`)
+    .then((re) => {
+      res.json(re.data);
+    });
+});
+
 app.listen(3005, () => {
   try {
     console.log("listening on port 3005");
